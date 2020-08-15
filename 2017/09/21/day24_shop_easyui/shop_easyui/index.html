@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>easyui入门 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="easyUI+ssm 商品管理后台查询数据封装类1、请求数据封装 12345678910111213141516171819202122232425262728public class DataGridReq &amp;#123;    &#x2F;**     * 当前页面     *&#x2F;    private Integer page;    &#x2F;**     * 每页记录数量     *&#x2F;    private">
+<meta property="og:type" content="article">
+<meta property="og:title" content="easyui入门">
+<meta property="og:url" content="http://yoursite.com/2017/09/21/day24_shop_easyui/shop_easyui/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="easyUI+ssm 商品管理后台查询数据封装类1、请求数据封装 12345678910111213141516171819202122232425262728public class DataGridReq &amp;#123;    &#x2F;**     * 当前页面     *&#x2F;    private Integer page;    &#x2F;**     * 每页记录数量     *&#x2F;    private">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-21T10:42:34.000Z">
+<meta property="article:modified_time" content="2017-11-17T08:23:53.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-day24_shop_easyui/shop_easyui" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/21/day24_shop_easyui/shop_easyui/" class="article-date">
+  <time datetime="2017-09-21T10:42:34.000Z" itemprop="datePublished">2017-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      easyui入门
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="easyUI-ssm-商品管理后台"><a href="#easyUI-ssm-商品管理后台" class="headerlink" title="easyUI+ssm 商品管理后台"></a>easyUI+ssm 商品管理后台</h2><h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="数据封装类"><a href="#数据封装类" class="headerlink" title="数据封装类"></a>数据封装类</h3><p>1、请求数据封装</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataGridReq</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前页面</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Integer page;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 每页记录数量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Integer rows;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 排序的字段</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String sort;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 排序方式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String order;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 偏移量，即其实条数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Integer offest;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//注意：偏移量不是前台传递，而是后台计算出来的</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getOffest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.page - <span class="number">1</span>) * <span class="keyword">this</span>.rows;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、响应的数据分装成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataGridResult</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer total;<span class="comment">//总条数</span></span><br><span class="line">    <span class="keyword">private</span> List rows;<span class="comment">//记录</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="dao层"><a href="#dao层" class="headerlink" title="dao层"></a>dao层</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 分页排序 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findAllByReq&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;GoodResultMap&quot;</span>&gt;</span></span><br><span class="line">       select * from goods</span><br><span class="line">       <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;sort!=null and sort!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!-- 注意：order by后面的参数必须使用$来获取 --&gt;</span></span><br><span class="line">           order by $&#123;sort&#125; $&#123;order&#125;</span><br><span class="line">       <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;page!=null and page!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">           limit #&#123;offest&#125;,#&#123;rows&#125;</span><br><span class="line">       <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 获取总数量 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;count&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;int&quot;</span>&gt;</span></span><br><span class="line">       select count(*) from goods</span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="service层"><a href="#service层" class="headerlink" title="service层"></a>service层</h3><p>将总条数和list分装到DataGrridResult中</p>
+<p>count是总条数，goodList是封装好的商品信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataGridResult result=<span class="keyword">new</span> DataGridResult(count,goodList);</span><br></pre></td></tr></table></figure>
+
+<h3 id="controller层"><a href="#controller层" class="headerlink" title="controller层"></a>controller层</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;list&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> DataGridResult <span class="title">list</span><span class="params">(DataGridReq dataGridReq)</span> </span>&#123;</span><br><span class="line">       System.out.println(dataGridReq);</span><br><span class="line">       <span class="keyword">return</span> goodsService.findAllByReq(dataGridReq);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">id</span>=<span class="string">&quot;tt&quot;</span> <span class="attr">class</span>=<span class="string">&quot;easyui-datagrid&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:100%&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">url</span>=<span class="string">&quot;/taobao/goods/list&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">title</span>=<span class="string">&quot;商品信息列表&quot;</span> </span></span><br><span class="line"><span class="tag">       <span class="attr">iconCls</span>=<span class="string">&quot;icon-save&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">sortName</span>=<span class="string">&quot;gname&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">sortOrder</span>=<span class="string">&quot;asc&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">rownumbers</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">pagination</span>=<span class="string">&quot;true&quot;</span>      </span></span><br><span class="line"><span class="tag">       <span class="attr">fitColumns</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">singleSelect</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">toolbar</span>=<span class="string">&quot;#tb&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span> <span class="attr">field</span>=<span class="string">&quot;gname&quot;</span> <span class="attr">width</span>=<span class="string">&quot;80&quot;</span> <span class="attr">sortable</span>=<span class="string">&quot;true&quot;</span>&gt;</span>商品名称<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span> <span class="attr">field</span>=<span class="string">&quot;gprice&quot;</span> <span class="attr">width</span>=<span class="string">&quot;100&quot;</span> <span class="attr">sortable</span>=<span class="string">&quot;true&quot;</span>&gt;</span>单价<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span> <span class="attr">field</span>=<span class="string">&quot;num&quot;</span> <span class="attr">sortable</span>=<span class="string">&quot;true&quot;</span>&gt;</span>库存<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span> <span class="attr">field</span>=<span class="string">&quot;goodType&quot;</span> <span class="attr">sortable</span>=<span class="string">&quot;true&quot;</span>&gt;</span>类别<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span> <span class="attr">field</span>=<span class="string">&quot;description&quot;</span> <span class="attr">width</span>=<span class="string">&quot;220&quot;</span>&gt;</span>描述<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>title 标题</li>
+<li>iconCls 图标</li>
+<li>sortName 默认排序字段</li>
+<li>sortOrder 排序方式</li>
+<li>rownumbers 显示行号</li>
+<li>pagination 显示分页插件</li>
+<li>field 获取返回数据的字段对应的值</li>
+<li>width 列宽度，百分制</li>
+<li>sortable 可排序</li>
+<li>fitColumns 自适应</li>
+<li>singleSelect 单选</li>
+<li>toolbar 工具条</li>
+</ul>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><h3 id="封装数据"><a href="#封装数据" class="headerlink" title="封装数据"></a>封装数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxResult</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer code;<span class="comment">//信息码</span></span><br><span class="line">    <span class="keyword">private</span> String msg;<span class="comment">//信息</span></span><br><span class="line">    <span class="keyword">private</span> Object data;<span class="comment">//数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="dao层-1"><a href="#dao层-1" class="headerlink" title="dao层"></a>dao层</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;delete&quot;</span>&gt;</span></span><br><span class="line">       delete from goods where gid=#&#123;value&#125;</span><br><span class="line">   <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="service层-1"><a href="#service层-1" class="headerlink" title="service层"></a>service层</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> AjaxResult <span class="title">delete</span><span class="params">(Integer gid)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> delete = goodDao.delete(gid);</span><br><span class="line">       <span class="keyword">if</span> (delete == <span class="number">0</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> AjaxResult(GoodEnums.DEL_ERROR);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> AjaxResult(GoodEnums.DEL_SUC);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="controller层-1"><a href="#controller层-1" class="headerlink" title="controller层"></a>controller层</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;&#123;gid&#125;/delete&quot;)</span> <span class="comment">//restful风格请求</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> AjaxResult <span class="title">delete</span><span class="params">(<span class="meta">@PathVariable</span> Integer gid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> goodsService.delete(gid);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="前端-1"><a href="#前端-1" class="headerlink" title="前端"></a>前端</h3><p>在toolbar的删除按钮中调用下面的函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">del</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> row = $(<span class="string">&#x27;#tt&#x27;</span>).datagrid(<span class="string">&#x27;getSelected&#x27;</span>);<span class="comment">//获取选择的那一行数据</span></span><br><span class="line">    <span class="keyword">if</span> (row)&#123;</span><br><span class="line">        $.messager.confirm(<span class="string">&#x27;Confirm&#x27;</span>,<span class="string">&#x27;确定要删除吗？&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">r</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (r)&#123;</span><br><span class="line">                <span class="comment">//用户选择确定按钮后，发送请求</span></span><br><span class="line">                $.post(<span class="string">&#x27;/taobao/goods/&#x27;</span>+row.gid+<span class="string">&#x27;/delete&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (result.code==code.success)&#123;<span class="comment">//如果返回成功code</span></span><br><span class="line">                        $(<span class="string">&#x27;#tt&#x27;</span>).datagrid(<span class="string">&#x27;reload&#x27;</span>);    <span class="comment">// 刷新页面</span></span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        $.messager.show(&#123;</span><br><span class="line">                            title: <span class="string">&#x27;Error&#x27;</span>,</span><br><span class="line">                            msg: result.msg <span class="comment">// 显示错误信息</span></span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,<span class="string">&#x27;json&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/21/day24_shop_easyui/shop_easyui/" data-id="ckdvnr2p1002dhv5dgneoa6zi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/09/day02_xml/xml/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          dom4j
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/15/day22_ssh/crm/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/">java基础增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7%E5%A2%9E%E5%BC%BA/">java高级增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/" rel="tag">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" rel="tag">javaweb三驾马车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" rel="tag">java基础增强</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsp/" rel="tag">jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql-%E7%BC%93%E5%AD%98/" rel="tag">nosql 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-aop/" rel="tag">spring aop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-ioc/" rel="tag">spring ioc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-jdbc/" rel="tag">spring jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mybatis/" rel="tag">spring mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-struts2-hibernate/" rel="tag">spring struts2 hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-%E4%BA%8B%E5%8A%A1/" rel="tag">spring 事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springmvc/" rel="tag">springmvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml%E8%A7%A3%E6%9E%90/" rel="tag">xml解析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" rel="tag">中级测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-jquery/" rel="tag">前端 jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" rel="tag">持久化框架 mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" rel="tag">持久层框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" rel="tag">数据库 mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" rel="tag">高级项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hibernate/" style="font-size: 13.33px;">hibernate</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" style="font-size: 13.33px;">javaweb三驾马车</a> <a href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" style="font-size: 16.67px;">java基础增强</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nosql-%E7%BC%93%E5%AD%98/" style="font-size: 10px;">nosql 缓存</a> <a href="/tags/spring-aop/" style="font-size: 10px;">spring aop</a> <a href="/tags/spring-ioc/" style="font-size: 10px;">spring ioc</a> <a href="/tags/spring-jdbc/" style="font-size: 10px;">spring jdbc</a> <a href="/tags/spring-mybatis/" style="font-size: 10px;">spring mybatis</a> <a href="/tags/spring-struts2-hibernate/" style="font-size: 10px;">spring struts2 hibernate</a> <a href="/tags/spring-%E4%BA%8B%E5%8A%A1/" style="font-size: 10px;">spring 事务</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springmvc/" style="font-size: 10px;">springmvc</a> <a href="/tags/struts2/" style="font-size: 10px;">struts2</a> <a href="/tags/xml%E8%A7%A3%E6%9E%90/" style="font-size: 10px;">xml解析</a> <a href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">中级测试</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF-jquery/" style="font-size: 13.33px;">前端 jquery</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" style="font-size: 10px;">持久化框架 mybatis</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">持久层框架</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" style="font-size: 10px;">数据库 mysql</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">高级项目</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/05/day29_nginx/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day31_%E9%83%A8%E7%BD%B2/%E5%8F%91%E5%B8%83%E6%96%87%E6%A1%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day30_docker/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/21/day32_react/react/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/day28_es6/es6/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

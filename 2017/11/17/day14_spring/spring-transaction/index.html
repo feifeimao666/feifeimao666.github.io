@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>spring事务 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="事务回顾知识1、什么是事务 事务逻辑上的一组操作,组成这组操作的各个逻辑单元,要么一起成功,要么一起失败. 2、事务特性:ACID  原子性    :强调事务的不可分割. 一致性    :事务的执行的前后数据的完整性保持一致(转账). 隔离性    :一个事务执行的过程中,不应该受到其他事务的干扰 持久性    :事务一旦结束,数据就持久到数据库  3、如果不考虑隔离性将会引发下面的安全性问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring事务">
+<meta property="og:url" content="http://yoursite.com/2017/11/17/day14_spring/spring-transaction/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="事务回顾知识1、什么是事务 事务逻辑上的一组操作,组成这组操作的各个逻辑单元,要么一起成功,要么一起失败. 2、事务特性:ACID  原子性    :强调事务的不可分割. 一致性    :事务的执行的前后数据的完整性保持一致(转账). 隔离性    :一个事务执行的过程中,不应该受到其他事务的干扰 持久性    :事务一旦结束,数据就持久到数据库  3、如果不考虑隔离性将会引发下面的安全性问题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/82673948.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/62052374.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/23305954.jpg">
+<meta property="article:published_time" content="2017-11-17T07:51:58.000Z">
+<meta property="article:modified_time" content="2017-11-17T08:17:20.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="spring 事务">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/82673948.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-day14_spring/spring-transaction" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/day14_spring/spring-transaction/" class="article-date">
+  <time datetime="2017-11-17T07:51:58.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spring事务
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="回顾知识"><a href="#回顾知识" class="headerlink" title="回顾知识"></a>回顾知识</h3><p>1、什么是事务</p>
+<p>事务逻辑上的一组操作,组成这组操作的各个逻辑单元,要么一起成功,要么一起失败.</p>
+<p>2、事务特性:ACID</p>
+<ul>
+<li>原子性    :强调事务的不可分割.</li>
+<li>一致性    :事务的执行的前后数据的完整性保持一致(转账).</li>
+<li>隔离性    :一个事务执行的过程中,不应该受到其他事务的干扰</li>
+<li>持久性    :事务一旦结束,数据就持久到数据库</li>
+</ul>
+<p>3、如果不考虑隔离性将会引发下面的安全性问题</p>
+<ul>
+<li>脏读            :一个事务读到了另一个事务的未提交commit的数据</li>
+<li>不可重复读    :一个事务读到了另一个事务已经提交的update的数据导致多次查询结果不一致</li>
+<li>虚读（幻读）    :一个事务读到了另一个事务已经提交的insert的数据导致多次查询结果不一致</li>
+</ul>
+<p>4、解决读问题:设置事务隔离级别（每种数据库的隔离级别不一样）</p>
+<ul>
+<li>未提交读    :脏读，不可重复读，虚读都有可能发生</li>
+<li>已提交读    :避免脏读。但是不可重复读和虚读有可能发生(sqlserver,orcale)</li>
+<li>可重复读    :避免脏读和不可重复读.但是虚读有可能发生（mysql）</li>
+<li>串行化的    :避免以上所有读问题</li>
+</ul>
+<h3 id="1、使用Aspectj注解方式解决事务问题"><a href="#1、使用Aspectj注解方式解决事务问题" class="headerlink" title="1、使用Aspectj注解方式解决事务问题"></a>1、使用Aspectj注解方式解决事务问题</h3><p>1、添加约束文档</p>
+<p><a target="_blank" rel="noopener" href="http://www.springframework.org/schema/tx">http://www.springframework.org/schema/tx</a> <a target="_blank" rel="noopener" href="http://www.springframework.org/schema/tx/spring-tx.xsd">http://www.springframework.org/schema/tx/spring-tx.xsd</a></p>
+<p>2、xml配置事务管理器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;transactionManager&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 开启事务：通过aop的方式，对方法进行事务的增强 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>1、在任意希望进行事务增强的方法上面添加@Transactional注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMoney</span><span class="params">(<span class="keyword">int</span> uid,<span class="keyword">float</span> money,<span class="keyword">int</span> typeid)</span></span>&#123;    </span><br><span class="line">    moneyDao.getMoney(uid, money);</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">1</span>/<span class="number">0</span>;<span class="comment">//这里报错，会进行事务回滚</span></span><br><span class="line">    <span class="keyword">return</span> moneyDao.insertReocrd(<span class="keyword">new</span> Record(uid, money, typeid));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、通过XML配置AOP方式解决事务问题"><a href="#2、通过XML配置AOP方式解决事务问题" class="headerlink" title="2、通过XML配置AOP方式解决事务问题"></a>2、通过XML配置AOP方式解决事务问题</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置AOP --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置切入点：指定哪些方法要执行事务增强 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">&quot;txAdvice&quot;</span> <span class="attr">pointcut</span>=<span class="string">&quot;execution(* com.hemi.service.*.*(..))&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置增强 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">&quot;txAdvice&quot;</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 细粒度控制某个方法上事务的属性：例如事务是否传递，事务是否回滚等等 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- REQUIRED:有事务就用，没有就创建 SUPPORTS:有就用，没有就非事务执行 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- no-rollback-for:当出现了ArithmeticException异常时，也不回滚已提交的事务 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;*Money&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>  <span class="attr">no-rollback-for</span>=<span class="string">&quot;ArithmeticException&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;delect*&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;update*&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;insert*&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>/&gt;</span>        </span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;select*&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;SUPPORTS&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">            isolation=&quot;DEFAULT&quot;        隔离级别</span></span><br><span class="line"><span class="comment">            propagation=&quot;REQUIRED&quot;    传播行为</span></span><br><span class="line"><span class="comment">            read-only=&quot;false&quot;    只读</span></span><br><span class="line"><span class="comment">            timeout=&quot;-1&quot;        过期时间</span></span><br><span class="line"><span class="comment">            rollback-for=&quot;&quot;        -Exception</span></span><br><span class="line"><span class="comment">            no-rollback-for=&quot;&quot;    +Exception</span></span><br><span class="line"><span class="comment">        --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong></p>
+<p>推荐使用第二种方式，可以控制所有的方法是否使用事务！</p>
+<h2 id="事务补充知识点"><a href="#事务补充知识点" class="headerlink" title="事务补充知识点"></a>事务补充知识点</h2><h3 id="1、事务回滚控制"><a href="#1、事务回滚控制" class="headerlink" title="1、事务回滚控制"></a>1、事务回滚控制</h3><p>控制遇到哪些异常才要回滚事务</p>
+<p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/82673948.jpg"></p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在需要增强的方法上面，添加该注解，就可以使用事务</span></span><br><span class="line"><span class="comment">//noRollbackFor:如果出现了ArithmeticException，忽略</span></span><br><span class="line"><span class="meta">@Transactional(noRollbackFor=&#123;ArithmeticException.class&#125;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMoney</span><span class="params">(<span class="keyword">int</span> uid, <span class="keyword">float</span> money, <span class="keyword">int</span> typeid)</span> </span>&#123;</span><br><span class="line">    moneyDao.getMoney(uid, money);</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span> / <span class="number">0</span>;<span class="comment">//虽然这里抛出异常，但是上面的操作依然生效，事务不会回滚</span></span><br><span class="line">    <span class="keyword">return</span> moneyDao.insertReocrd(<span class="keyword">new</span> Record(uid, money, typeid));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他事务属性一览表</p>
+<p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/62052374.jpg"></p>
+<h3 id="2、事务隔离级别-isolation"><a href="#2、事务隔离级别-isolation" class="headerlink" title="2、事务隔离级别 isolation"></a>2、事务隔离级别 isolation</h3><p>事务隔离概念：解决并发问题</p>
+<p>不同的数据库支持不同的隔离级别，一般不用修改</p>
+<h3 id="3、事务传递-propagation"><a href="#3、事务传递-propagation" class="headerlink" title="3、事务传递 propagation"></a>3、事务传递 propagation</h3><p>事务传递概念:两个方法相互嵌套，事务是否公用，例如：方法A的事务是否可以传递给方法B所使用</p>
+<p>事务传递有多种情况，如下：</p>
+<p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/23305954.jpg"></p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">事务：火车票售票点买票  非事务（正常执行）：打电话买票</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    假设 ma()为方法<span class="function">A <span class="title">mb</span><span class="params">()</span>为方法B</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    1、required:ma有事务,mb就用,ma没事务,mb自己创建</span></span><br><span class="line"><span class="function">    @Transactional</span></span><br><span class="line"><span class="function">    <span class="title">ma</span><span class="params">()</span></span>&#123;</span><br><span class="line">        mb();<span class="comment">//使用了方法ma的事务，如果ma回滚，那么mb也回滚</span></span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">1</span>/<span class="number">0</span>;        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">2</span>、supports:ma有事务,mb就用,ma没事务,mb非事务执行</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    ma()&#123;</span><br><span class="line">        mb();<span class="comment">//打电话</span></span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">1</span>/<span class="number">0</span>;        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">3</span>、mandatory:ma有事务,mb就用,ma没事务,mb就报错</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    ma()&#123;</span><br><span class="line">        mb();<span class="comment">//如果没有事务，那么这句就抛出异常</span></span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">1</span>/<span class="number">0</span>;        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">4</span>、required_new:ma有事务,mb就暂停别人的事务,然后mb自己开启事务,mb执行完后,ma在恢复事务并继续执行</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    ma()&#123;</span><br><span class="line">        update();</span><br><span class="line">        mb();</span><br><span class="line">        update();</span><br><span class="line">    &#125;</span><br><span class="line">    上面的代码运行,实际相当于下面的代码</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    ma()&#123;</span><br><span class="line">        Connection con =connection.startTranscation();</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                update()    </span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                con.rollback();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                Connection con1 =connection.startTranscation();</span><br><span class="line">                mb();</span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                con1.rollback();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                insert();</span><br><span class="line">                <span class="keyword">int</span> a=<span class="number">10</span>/<span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                con.rollback();</span><br><span class="line">            &#125;    </span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            con.rollback();</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">5</span>、not_supported:ma有事务,mb就暂停别人的事务,然后mb非事务执行,mb执行完后,ma在恢复事务并继续执行</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    ma()&#123;</span><br><span class="line">        update();</span><br><span class="line">        mb();</span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">10</span>/<span class="number">0</span>;</span><br><span class="line">        insert();    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">6</span>、never:ma有事务,mb就抛异常,ma没事务,mb就非事务执行</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    ma()&#123;</span><br><span class="line">        update();</span><br><span class="line">        mb();</span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">10</span>/<span class="number">0</span>;</span><br><span class="line">        insert();    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">7</span>、nested:事务嵌套,ma有事务,mb就嵌套在别人的事务中,ma没事务,mb自己创建事务</span><br><span class="line">    ma()&#123;</span><br><span class="line">        update();</span><br><span class="line">        mb();</span><br><span class="line">        update();</span><br><span class="line">    &#125;</span><br><span class="line">    上面的代码运行,实际相当于下面的代码</span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    ma()&#123;</span><br><span class="line">        Connection con =connection.startTranscation();</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                update()    </span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                con.rollback();</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//插队</span></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                mb();</span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                con.rollback();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                insert();</span><br><span class="line">                <span class="keyword">int</span> a=<span class="number">10</span>/<span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                con.rollback();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            con.rollback();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/day14_spring/spring-transaction/" data-id="ckdvnr2on001ghv5de02t43tn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-%E4%BA%8B%E5%8A%A1/" rel="tag">spring 事务</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/17/day14_spring/spring-aop/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          spring-aop
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/17/day15_springmvc/springmvc/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">springmvc</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/">java基础增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7%E5%A2%9E%E5%BC%BA/">java高级增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/" rel="tag">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" rel="tag">javaweb三驾马车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" rel="tag">java基础增强</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsp/" rel="tag">jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql-%E7%BC%93%E5%AD%98/" rel="tag">nosql 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-aop/" rel="tag">spring aop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-ioc/" rel="tag">spring ioc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-jdbc/" rel="tag">spring jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mybatis/" rel="tag">spring mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-struts2-hibernate/" rel="tag">spring struts2 hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-%E4%BA%8B%E5%8A%A1/" rel="tag">spring 事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springmvc/" rel="tag">springmvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml%E8%A7%A3%E6%9E%90/" rel="tag">xml解析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" rel="tag">中级测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-jquery/" rel="tag">前端 jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" rel="tag">持久化框架 mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" rel="tag">持久层框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" rel="tag">数据库 mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" rel="tag">高级项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hibernate/" style="font-size: 13.33px;">hibernate</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" style="font-size: 13.33px;">javaweb三驾马车</a> <a href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" style="font-size: 16.67px;">java基础增强</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nosql-%E7%BC%93%E5%AD%98/" style="font-size: 10px;">nosql 缓存</a> <a href="/tags/spring-aop/" style="font-size: 10px;">spring aop</a> <a href="/tags/spring-ioc/" style="font-size: 10px;">spring ioc</a> <a href="/tags/spring-jdbc/" style="font-size: 10px;">spring jdbc</a> <a href="/tags/spring-mybatis/" style="font-size: 10px;">spring mybatis</a> <a href="/tags/spring-struts2-hibernate/" style="font-size: 10px;">spring struts2 hibernate</a> <a href="/tags/spring-%E4%BA%8B%E5%8A%A1/" style="font-size: 10px;">spring 事务</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springmvc/" style="font-size: 10px;">springmvc</a> <a href="/tags/struts2/" style="font-size: 10px;">struts2</a> <a href="/tags/xml%E8%A7%A3%E6%9E%90/" style="font-size: 10px;">xml解析</a> <a href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">中级测试</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF-jquery/" style="font-size: 13.33px;">前端 jquery</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" style="font-size: 10px;">持久化框架 mybatis</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">持久层框架</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" style="font-size: 10px;">数据库 mysql</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">高级项目</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/05/day29_nginx/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day31_%E9%83%A8%E7%BD%B2/%E5%8F%91%E5%B8%83%E6%96%87%E6%A1%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day30_docker/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/21/day32_react/react/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/day28_es6/es6/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>shop项目 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="登录与注册获取所有商品步骤：  1、GoodDao  1234567891011&#x2F;&#x2F;选择商品列表public List&lt;Goods&gt; selectGoods(int pageNum) &amp;#123;    String sql &#x3D; &quot;select g.*,t.typename from goods g inner join type t on g.typeid&#x3D;t.typeid">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shop项目">
+<meta property="og:url" content="http://yoursite.com/2017/11/17/day11_shop/shop/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="登录与注册获取所有商品步骤：  1、GoodDao  1234567891011&#x2F;&#x2F;选择商品列表public List&lt;Goods&gt; selectGoods(int pageNum) &amp;#123;    String sql &#x3D; &quot;select g.*,t.typename from goods g inner join type t on g.typeid&#x3D;t.typeid">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/16897056.jpg">
+<meta property="article:published_time" content="2017-11-17T07:51:58.000Z">
+<meta property="article:modified_time" content="2017-11-17T08:15:13.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="中级测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/16897056.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-day11_shop/shop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/day11_shop/shop/" class="article-date">
+  <time datetime="2017-11-17T07:51:58.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      shop项目
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="登录与注册"><a href="#登录与注册" class="headerlink" title="登录与注册"></a>登录与注册</h2><h2 id="获取所有商品"><a href="#获取所有商品" class="headerlink" title="获取所有商品"></a>获取所有商品</h2><p>步骤：</p>
+<ul>
+<li>1、GoodDao</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选择商品列表</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Goods&gt; <span class="title">selectGoods</span><span class="params">(<span class="keyword">int</span> pageNum)</span> </span>&#123;</span><br><span class="line">    String sql = <span class="string">&quot;select g.*,t.typename from goods g inner join type t on g.typeid=t.typeid limit ?,?&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> JdbcUtils.selectAll(sql, Goods.class, (pageNum-<span class="number">1</span>)*Const.PAGE_SIZE,Const.PAGE_SIZE);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//分页的时候使用</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">selectCount</span><span class="params">(Goods goods)</span> </span>&#123;</span><br><span class="line">    String sql=<span class="string">&quot;select count(gid) from goods&quot;</span>;</span><br><span class="line">    <span class="comment">//可以通过Number解决不同数据库返回值类型不同的问题</span></span><br><span class="line">    <span class="keyword">return</span> ((Number)JdbcUtils.selectValue(sql)).intValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2、GoodService</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Goods&gt; <span class="title">selectGoods</span><span class="params">(<span class="keyword">int</span> pageNum)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> goodsDao.selectGoods(pageNum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3、 GoodServlet</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    <span class="comment">//获取前端传递过来的当前页数</span></span><br><span class="line">    String pageNumStr = req.getParameter(<span class="string">&quot;pageNum&quot;</span>);</span><br><span class="line">    <span class="comment">//如果没有传递当前页数，默认为1</span></span><br><span class="line">    <span class="keyword">int</span> pageNum=<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//如果有传递当前页数，则使用当前页数</span></span><br><span class="line">    <span class="keyword">if</span>(pageNumStr!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        pageNum=Integer.parseInt(pageNumStr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//根据当前页数获取商品列表信息</span></span><br><span class="line">    List&lt;Goods&gt; list = goodsService.selectGoods(pageNum);</span><br><span class="line">    <span class="comment">//获取中条数</span></span><br><span class="line">    <span class="keyword">int</span> total = goodsService.selectCount(<span class="keyword">null</span>);</span><br><span class="line">    <span class="comment">//将列表信息，总条数，总页数放到Page对象中</span></span><br><span class="line">    Page&lt;Goods&gt; page=<span class="keyword">new</span> Page&lt;Goods&gt;();</span><br><span class="line">    page.setList(list);<span class="comment">//商品列表信息</span></span><br><span class="line">    page.setTotal(total);<span class="comment">//总条数</span></span><br><span class="line">    page.setPageNum(pageNum);<span class="comment">//当前页数</span></span><br><span class="line">    <span class="comment">//将page对象放到request对象中</span></span><br><span class="line">    req.setAttribute(<span class="string">&quot;page&quot;</span>, page);</span><br><span class="line">    <span class="comment">//转发到list.jsp页面</span></span><br><span class="line">    req.getRequestDispatcher(<span class="string">&quot;/goods/list.jsp&quot;</span>).forward(req, resp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>4、goodlist.jsp</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>序号<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>商品名称<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>价格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>库存 <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>类别 <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>操作<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">items</span>=<span class="string">&quot;$&#123;page.list&#125;&quot;</span> <span class="attr">var</span>=<span class="string">&quot;goods&quot;</span> <span class="attr">varStatus</span>=<span class="string">&quot;i&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;i.count&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;goods.gname &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;goods.gprice &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;goods.count &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;goods.typename &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span>&gt;</span>详情<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;user.username ==&#x27;admin&#x27; &#125;&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">a</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 分页 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;ctx &#125;/goods?op=list&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;page.pageNum&gt;1 &#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;ctx&#125;/goods?op=list&amp;pageNum=$&#123;page.pageNum-1&#125;&quot;</span>&gt;</span>上一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;page.pageNum&lt;page.pageTotal &#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;ctx&#125;/goods?op=list&amp;pageNum=$&#123;page.pageNum+1&#125;&quot;</span>&gt;</span>下一页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;ctx&#125;/goods?op=list&amp;pageNum=$&#123;page.pageTotal&#125;&quot;</span>&gt;</span>末页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">[$&#123;page.pageNum&#125;/$&#123;page.pageTotal&#125;]<span class="symbol">&amp;nbsp;</span>共$&#123;page.total&#125;条记录</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加到购物车"><a href="#添加到购物车" class="headerlink" title="添加到购物车"></a>添加到购物车</h2><p>思路：</p>
+<p>1、创建一个监听器，ServletContextListenner</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ServletContext context = sce.getServletContext();</span><br><span class="line">Map&lt;Integer, List&lt;GoodDetail&gt;&gt; map=<span class="keyword">new</span> HashMap&lt;Integer, List&lt;GoodDetail&gt;&gt;();</span><br><span class="line">context.setAttribute(<span class="string">&quot;map&quot;</span>, map);</span><br></pre></td></tr></table></figure>
+
+<p>2、在该监听器中创建一个Map&lt;Integer, List<GoodDetail>&gt; map（key:uid,value:购物车），并且放到ServletContext域对象</p>
+<p>3、在web.xml中注册监听器</p>
+<p>4、创建一个类Detail，里面有两个属性：gid(商品编号),num(购买数量)</p>
+<p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/16897056.jpg"></p>
+<ul>
+<li>list.jsp</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">items</span>=<span class="string">&quot;$&#123;page.list&#125;&quot;</span> <span class="attr">var</span>=<span class="string">&quot;goods&quot;</span> <span class="attr">varStatus</span>=<span class="string">&quot;i&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;i.count&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;goods.gname &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;goods.gprice &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;goods.count &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>$&#123;goods.typename &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">hidden</span>=<span class="string">&quot;hidden&quot;</span>&gt;</span>$&#123;goods.gid &#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;number&quot;</span> <span class="attr">required</span>=<span class="string">&quot;required&quot;</span>/&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span>&gt;</span>详情<span class="tag">&lt;/<span class="name">a</span>&gt;</span>    </span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;addGoodsToCar()&quot;</span>&gt;</span>加入购物车<span class="tag">&lt;/<span class="name">a</span>&gt;</span>            </span><br><span class="line">                <span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test</span>=<span class="string">&quot;$&#123;user.username ==&#x27;admin&#x27; &#125;&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;ctx &#125;/goods?op=toUpdate&amp;gid=$&#123;goods.gid&#125;&quot;</span>&gt;</span>更新<span class="tag">&lt;/<span class="name">a</span>&gt;</span> </span><br><span class="line">                    <span class="tag">&lt;<span class="name">a</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">/*js的方式*/</span></span></span><br><span class="line"><span class="javascript">     <span class="function"><span class="keyword">function</span> <span class="title">addGoodsToCar</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> a=event.target;<span class="comment">//获取点击对象的事件源</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> num=a.parentElement.previousElementSibling.firstElementChild;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> gid=num.parentElement.previousElementSibling;</span></span><br><span class="line"><span class="javascript">        location=<span class="string">&quot;$&#123;ctx&#125;/goods?op=addGoodsToCar&amp;gid=&quot;</span>+gid.innerHTML+<span class="string">&quot;&amp;num=&quot;</span>+num.value;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>GoodsServlet</li>
+</ul>
+<p>用户点击加入购物车，将gid保存到Map&lt;Integer, List<GoodDetail>&gt; map中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addGoodsToCar</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> gid =Integer.parseInt(req.getParameter(<span class="string">&quot;gid&quot;</span>));</span><br><span class="line">    <span class="keyword">int</span> num =Integer.parseInt(req.getParameter(<span class="string">&quot;num&quot;</span>));</span><br><span class="line">    User user = (User) req.getSession().getAttribute(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> uid = user.getUid();</span><br><span class="line">    Detail d=<span class="keyword">new</span> Detail(num, gid);</span><br><span class="line">    List&lt;Detail&gt; goodList = shopCar.get(uid);<span class="comment">//根据uid获取个人购物车List</span></span><br><span class="line">    <span class="keyword">if</span>(goodList==<span class="keyword">null</span>)&#123;<span class="comment">//如果不存在List，说明是第一次添加商品到购物车</span></span><br><span class="line">        goodList=<span class="keyword">new</span> ArrayList&lt;Detail&gt;();<span class="comment">//创建购物车List        </span></span><br><span class="line">        shopCar.put(uid, goodList);<span class="comment">//将购物车放到Map中</span></span><br><span class="line">    &#125;</span><br><span class="line">    goodList.add(d);<span class="comment">//添加商品到购物车</span></span><br><span class="line">    list(req, resp);<span class="comment">//调用显示商品列表信息的方法，回到到商品信息列表页面</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="订单"><a href="#订单" class="headerlink" title="订单"></a>订单</h2><h3 id="添加订单"><a href="#添加订单" class="headerlink" title="添加订单"></a>添加订单</h3><p>思路：</p>
+<p>1、生成uuid作为订单编号，并插入订单记录</p>
+<p>2、将List<Detail>中的订单项循环加入到数据库</p>
+<ul>
+<li>OrderDaoImpl</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insertOrder</span><span class="params">(List&lt;Detail&gt; list, Gorder gorder)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        JdbcUtils.startTransaction();<span class="comment">//开启事务</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//TODO 插入订单</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//TODO 循环插入订单详情</span></span><br><span class="line"></span><br><span class="line">        JdbcUtils.commit();<span class="comment">//提交事务</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        JdbcUtils.rollback();<span class="comment">//回滚事务</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//如果插入失败，则返回0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;<span class="comment">//返回最后结果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>OrderServlet</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">order</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//TODO 从ServletContext域对象中获取用户的购物车商品信息</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//TODO 获取uid</span></span><br><span class="line"></span><br><span class="line">    String oid=UUIDUtils.uuid();<span class="comment">//订单编号</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//循环给订单项添加订单编号</span></span><br><span class="line">    List&lt;Detail&gt; list = shopCar.get(uid);</span><br><span class="line">    <span class="keyword">for</span> (Detail detail : list) &#123;</span><br><span class="line">        detail.setOid(oid);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//TODO 调用service层</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//判断返回值    </span></span><br><span class="line">    <span class="keyword">if</span>(result==<span class="number">0</span>)&#123;</span><br><span class="line">        resp.getWriter().write(<span class="string">&quot;&lt;script&gt;alert(&#x27;下单失败&#x27;);history.go(-1)&lt;/script&gt;&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        resp.getWriter().write(<span class="string">&quot;&lt;script&gt;alert(&#x27;下单成功&#x27;);location=&#x27;/goods?op=list&#x27;&lt;/script&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：订单编号：使用uuid来代替</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">uuid</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> UUID.randomUUID().toString().replaceAll(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="支付订单"><a href="#支付订单" class="headerlink" title="支付订单"></a>支付订单</h3><p>思路：</p>
+<p>1、根据用户编号和金额，修改余额</p>
+<p>2、根据订单编号修改订单状态</p>
+<p>3、根据订单编号选出所有商品</p>
+<p>4、循环修改商品库存</p>
+<p>5、修改Session中User的余额</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/day11_shop/shop/" data-id="ckdvnr2od000nhv5dcgbph2kg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" rel="tag">中级测试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/26/day28_es6/es6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/17/day12_ajax/ajax/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ajax技术</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/">java基础增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7%E5%A2%9E%E5%BC%BA/">java高级增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/" rel="tag">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" rel="tag">javaweb三驾马车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" rel="tag">java基础增强</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsp/" rel="tag">jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql-%E7%BC%93%E5%AD%98/" rel="tag">nosql 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-aop/" rel="tag">spring aop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-ioc/" rel="tag">spring ioc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-jdbc/" rel="tag">spring jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mybatis/" rel="tag">spring mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-struts2-hibernate/" rel="tag">spring struts2 hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-%E4%BA%8B%E5%8A%A1/" rel="tag">spring 事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springmvc/" rel="tag">springmvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml%E8%A7%A3%E6%9E%90/" rel="tag">xml解析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" rel="tag">中级测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-jquery/" rel="tag">前端 jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" rel="tag">持久化框架 mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" rel="tag">持久层框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" rel="tag">数据库 mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" rel="tag">高级项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hibernate/" style="font-size: 13.33px;">hibernate</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" style="font-size: 13.33px;">javaweb三驾马车</a> <a href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" style="font-size: 16.67px;">java基础增强</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nosql-%E7%BC%93%E5%AD%98/" style="font-size: 10px;">nosql 缓存</a> <a href="/tags/spring-aop/" style="font-size: 10px;">spring aop</a> <a href="/tags/spring-ioc/" style="font-size: 10px;">spring ioc</a> <a href="/tags/spring-jdbc/" style="font-size: 10px;">spring jdbc</a> <a href="/tags/spring-mybatis/" style="font-size: 10px;">spring mybatis</a> <a href="/tags/spring-struts2-hibernate/" style="font-size: 10px;">spring struts2 hibernate</a> <a href="/tags/spring-%E4%BA%8B%E5%8A%A1/" style="font-size: 10px;">spring 事务</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springmvc/" style="font-size: 10px;">springmvc</a> <a href="/tags/struts2/" style="font-size: 10px;">struts2</a> <a href="/tags/xml%E8%A7%A3%E6%9E%90/" style="font-size: 10px;">xml解析</a> <a href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">中级测试</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF-jquery/" style="font-size: 13.33px;">前端 jquery</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" style="font-size: 10px;">持久化框架 mybatis</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">持久层框架</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" style="font-size: 10px;">数据库 mysql</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">高级项目</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/05/day29_nginx/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day31_%E9%83%A8%E7%BD%B2/%E5%8F%91%E5%B8%83%E6%96%87%E6%A1%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day30_docker/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/21/day32_react/react/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/day28_es6/es6/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

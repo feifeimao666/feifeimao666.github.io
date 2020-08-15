@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>dom编程 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="dom的概念document object model 将文档中的标签封装成对象，通过js的方式去操作对象的属性和方法，从而实现动态修改页面元素的效果。 获取元素1234567891011    document.getElementById(&amp;#x27;d1&amp;#x27;);&#x2F;&#x2F;一个对象document.getElementsByTagName(&amp;#x27;标签名&amp;#x27;);&#x2F;&#x2F;类数组docu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dom编程">
+<meta property="og:url" content="http://yoursite.com/2017/11/17/day05_js/dom/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="dom的概念document object model 将文档中的标签封装成对象，通过js的方式去操作对象的属性和方法，从而实现动态修改页面元素的效果。 获取元素1234567891011    document.getElementById(&amp;#x27;d1&amp;#x27;);&#x2F;&#x2F;一个对象document.getElementsByTagName(&amp;#x27;标签名&amp;#x27;);&#x2F;&#x2F;类数组docu">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/91812096.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/98545446.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/87165510.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/2200220.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/82075797.jpg">
+<meta property="article:published_time" content="2017-11-17T07:51:56.000Z">
+<meta property="article:modified_time" content="2017-11-17T08:05:57.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/91812096.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-day05_js/dom" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/day05_js/dom/" class="article-date">
+  <time datetime="2017-11-17T07:51:56.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      dom编程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="dom的概念"><a href="#dom的概念" class="headerlink" title="dom的概念"></a>dom的概念</h2><p>document object model</p>
+<p>将文档中的标签封装成对象，通过js的方式去操作对象的属性和方法，从而实现动态修改页面元素的效果。</p>
+<h2 id="获取元素"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">&#x27;d1&#x27;</span>);<span class="comment">//一个对象</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;标签名&#x27;</span>);<span class="comment">//类数组</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementsByName(<span class="string">&#x27;name属性&#x27;</span>);<span class="comment">//类数组</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">&#x27;css选择器&#x27;</span>);<span class="comment">//符合条件的第一个对象</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;css选择器&#x27;</span>);<span class="comment">//类数组</span></span><br><span class="line"></span><br><span class="line">id;</span><br></pre></td></tr></table></figure>
+<h3 id="获取事件源"><a href="#获取事件源" class="headerlink" title="获取事件源"></a>获取事件源</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过id获取</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">aa</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> input=<span class="built_in">document</span>.getElementById(id);</span><br><span class="line">    alert(input.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过this关键字</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bb</span>(<span class="params">ii</span>) </span>&#123;</span><br><span class="line">    alert(ii.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过事件event获取</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cc</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> input=event.target;<span class="comment">//事件源</span></span><br><span class="line">    alert(input.value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><ul>
+<li>通过修改style属性</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;dd&#x27;</span>);</span><br><span class="line"><span class="comment">//方式一</span></span><br><span class="line">div.style=<span class="string">&quot;background:blue;color:red;font-size:50px&quot;</span>;</span><br><span class="line"><span class="comment">//方式二</span></span><br><span class="line">div.style.color=<span class="string">&quot;red&quot;</span>;</span><br><span class="line">div.style.background=<span class="string">&quot;blue&quot;</span>;</span><br><span class="line">div.style.fontSize=<span class="string">&quot;50px&quot;</span>;<span class="comment">//属性必须是驼峰命名法</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过className需改类名</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div=<span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;div&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">if</span>(div.className==<span class="string">&#x27;d1&#x27;</span>)&#123;</span><br><span class="line">    div.className=<span class="string">&#x27;d2&#x27;</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    div.className=<span class="string">&#x27;d1&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/91812096.jpg"></p>
+<h3 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML"></a>innerHTML</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">div.innerHTML=<span class="string">&quot;abc&quot;</span>;<span class="comment">//修改标签体内容为abc</span></span><br><span class="line">div.innerHTML=<span class="string">&quot;&lt;div style=&#x27;color:red&#x27;&gt;&lt;/div&gt;&quot;</span>;<span class="comment">//通过修改标签体内容，向标签中添加一个div子标签</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>与之对应的还有innerText，只能给标签赋值普通的文本，不能赋值新的标签</li>
+<li>另外还有 outerHTML获取整个标签的内容，包括标签本身</li>
+<li>outerText获取标签体内容，不包括标签本身</li>
+</ol>
+<h2 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- onsubmit：return false则表单不提交，return true则表单提交 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;register.jsp&quot;</span> <span class="attr">onsubmit</span>=<span class="string">&quot;return check()&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkPwd</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pwd=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;password&#x27;</span>).value;</span><br><span class="line">    <span class="comment">//正确规则的表达式</span></span><br><span class="line">    <span class="keyword">var</span> reg=<span class="regexp">/^[0-9]&#123;3,16&#125;$/</span>;</span><br><span class="line">    <span class="keyword">var</span> span=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;pwdMsg&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!reg.test(pwd))&#123;</span><br><span class="line">        span.innerHTML=<span class="string">&quot;密码必须是6-16位数字&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//通过返回false，来阻止表单的提交</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        span.innerHTML=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h3><p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/98545446.jpg"></p>
+<p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/87165510.jpg"></p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/2200220.jpg"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">父节点.appendChild(子节点);</span><br><span class="line">父节点.removeChild(子节点);</span><br></pre></td></tr></table></figure>
+
+<p>注意：可以使用<code>节点.remove()</code>，将自身删除</p>
+<h3 id="常用事件"><a href="#常用事件" class="headerlink" title="常用事件"></a>常用事件</h3><p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/82075797.jpg"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div=<span class="built_in">document</span>.getElementById(<span class="string">&quot;d1&quot;</span>);</span><br><span class="line">div.onmouseover=changeStyle1;<span class="comment">//注意是函数名</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><p>上面介绍了对象中的很多属性，例如:style、class、id，还有事件也属于属性，如果你记不住这些属性的用法，可以使用<code>setAttribute(&quot;属性名&quot;,&quot;属性值&quot;)</code>这种通用的做法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div=<span class="built_in">document</span>.getElementById(<span class="string">&quot;d1&quot;</span>);</span><br><span class="line">div.setAttribute(<span class="string">&quot;class&quot;</span>,<span class="string">&quot;d1&quot;</span>);</span><br><span class="line">div.setAttribute(<span class="string">&quot;onclick&quot;</span>,<span class="string">&quot;add()&quot;</span>);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/day05_js/dom/" data-id="ckdvnr2nz0004hv5d05ogb3ht" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/17/day16_hibernate/hibernate/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          hibernate
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/17/day07_sql/sql/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据库</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/">java基础增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7%E5%A2%9E%E5%BC%BA/">java高级增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/" rel="tag">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" rel="tag">javaweb三驾马车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" rel="tag">java基础增强</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsp/" rel="tag">jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql-%E7%BC%93%E5%AD%98/" rel="tag">nosql 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-aop/" rel="tag">spring aop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-ioc/" rel="tag">spring ioc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-jdbc/" rel="tag">spring jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mybatis/" rel="tag">spring mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-struts2-hibernate/" rel="tag">spring struts2 hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-%E4%BA%8B%E5%8A%A1/" rel="tag">spring 事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springmvc/" rel="tag">springmvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml%E8%A7%A3%E6%9E%90/" rel="tag">xml解析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" rel="tag">中级测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-jquery/" rel="tag">前端 jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" rel="tag">持久化框架 mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" rel="tag">持久层框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" rel="tag">数据库 mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" rel="tag">高级项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hibernate/" style="font-size: 13.33px;">hibernate</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" style="font-size: 13.33px;">javaweb三驾马车</a> <a href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" style="font-size: 16.67px;">java基础增强</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nosql-%E7%BC%93%E5%AD%98/" style="font-size: 10px;">nosql 缓存</a> <a href="/tags/spring-aop/" style="font-size: 10px;">spring aop</a> <a href="/tags/spring-ioc/" style="font-size: 10px;">spring ioc</a> <a href="/tags/spring-jdbc/" style="font-size: 10px;">spring jdbc</a> <a href="/tags/spring-mybatis/" style="font-size: 10px;">spring mybatis</a> <a href="/tags/spring-struts2-hibernate/" style="font-size: 10px;">spring struts2 hibernate</a> <a href="/tags/spring-%E4%BA%8B%E5%8A%A1/" style="font-size: 10px;">spring 事务</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springmvc/" style="font-size: 10px;">springmvc</a> <a href="/tags/struts2/" style="font-size: 10px;">struts2</a> <a href="/tags/xml%E8%A7%A3%E6%9E%90/" style="font-size: 10px;">xml解析</a> <a href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">中级测试</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF-jquery/" style="font-size: 13.33px;">前端 jquery</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" style="font-size: 10px;">持久化框架 mybatis</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">持久层框架</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" style="font-size: 10px;">数据库 mysql</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">高级项目</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/05/day29_nginx/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day31_%E9%83%A8%E7%BD%B2/%E5%8F%91%E5%B8%83%E6%96%87%E6%A1%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day30_docker/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/21/day32_react/react/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/day28_es6/es6/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

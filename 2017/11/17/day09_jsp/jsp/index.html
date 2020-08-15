@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="[TOC] jsp的概念概念：java server page 一种运行在服务端的语言 作用：可以写java代码，实现动态页面 特点：java代码嵌套在html中，html嵌套在java中，先编译后执行 jsp执行顺序用户第一次访问页面的的时候，服务器会将对应的jsp翻译成java代码，编译成class文件，并且放在work目录下面 jspservice()在用户每次访问的时候都会调用，在这个方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/11/17/day09_jsp/jsp/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] jsp的概念概念：java server page 一种运行在服务端的语言 作用：可以写java代码，实现动态页面 特点：java代码嵌套在html中，html嵌套在java中，先编译后执行 jsp执行顺序用户第一次访问页面的的时候，服务器会将对应的jsp翻译成java代码，编译成class文件，并且放在work目录下面 jspservice()在用户每次访问的时候都会调用，在这个方法">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/53668114.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/89880487.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/73288636.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/50178470.jpg">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/4333878.jpg">
+<meta property="article:published_time" content="2017-11-17T07:51:56.000Z">
+<meta property="article:modified_time" content="2017-11-17T07:51:56.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/53668114.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-day09_jsp/jsp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/day09_jsp/jsp/" class="article-date">
+  <time datetime="2017-11-17T07:51:56.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="jsp的概念"><a href="#jsp的概念" class="headerlink" title="jsp的概念"></a>jsp的概念</h2><p>概念：java server page 一种运行在服务端的语言</p>
+<p>作用：可以写java代码，实现动态页面</p>
+<p>特点：java代码嵌套在html中，html嵌套在java中，先编译后执行</p>
+<h3 id="jsp执行顺序"><a href="#jsp执行顺序" class="headerlink" title="jsp执行顺序"></a>jsp执行顺序</h3><p>用户第一次访问页面的的时候，服务器会将对应的jsp翻译成java代码，编译成class文件，并且放在work目录下面</p>
+<p>jspservice()在用户每次访问的时候都会调用，在这个方法里面，通过out.write()将前面代码输出要浏览器中。</p>
+<h2 id="jsp基本语法"><a href="#jsp基本语法" class="headerlink" title="jsp基本语法"></a>jsp基本语法</h2><h3 id="三种语法"><a href="#三种语法" class="headerlink" title="三种语法"></a>三种语法</h3><p>####　1、jsp表达式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%=<span class="number">1</span>+<span class="number">1</span>%&gt;</span><br><span class="line">&lt;%=<span class="keyword">new</span> Date()%&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>本质：out.write(内容);</li>
+<li>可以写任何有返回值的语句，但是不能写”;”</li>
+<li>相当于System.out.println();可以写什么，这就就可以写什么</li>
+</ul>
+<h4 id="2、jsp脚本片段"><a href="#2、jsp脚本片段" class="headerlink" title="2、jsp脚本片段"></a>2、jsp脚本片段</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">10</span>;</span><br><span class="line">    out.write(a);</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>本质：就是将这些java代码原模原样的复制到了_jspservice()里面</li>
+<li>可以写多行java代码，必须有”;”</li>
+<li>函数里面可以写什么，这里就可以写什么</li>
+</ul>
+<h4 id="3、jsp声明"><a href="#3、jsp声明" class="headerlink" title="3、jsp声明"></a>3、jsp声明</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;%!</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">10</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello jsp&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>本质：就是将这些java代码原模原样的复制到类里面，就是定义了类的成员</li>
+<li>可以写多行java代码，必须有”;”</li>
+<li>类中可以写什么，这里就可以写什么</li>
+</ul>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--jsp注释：不会输出到浏览器上面--%&gt;</span><br><span class="line">&lt;!-- 前端的注释：会输出到浏览器上面 --&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三大指令"><a href="#三大指令" class="headerlink" title="三大指令"></a>三大指令</h3><p>JSP指令是告诉引擎如何处理JSP页面中的其余部分</p>
+<p>基本语法</p>
+<p>&lt;%@ 指令 属性=”属性值”,属性=”属性值”…%&gt;<br>例如：<br>&lt;%@ page contentType=”text/html; charset=utf-8” pageEncoding=”utf-8” %&gt;</p>
+<ul>
+<li><p>page指令</p>
+<ul>
+<li>import 导包</li>
+<li>pageEncoding 页面编码</li>
+<li>contentType 浏览器编码</li>
+<li>errorPage 错误页面</li>
+<li>isErrorPage 是否为错误页面</li>
+</ul>
+</li>
+<li><p>taglib指令<br>&lt;%@ taglib prefix=”前缀” uri=”标签库地址”%&gt;</p>
+</li>
+<li><p>include指令</p>
+<ul>
+<li>file 包含的文件地址</li>
+</ul>
+<p>  <strong>注意</strong><br>  将两个jsp文件合为一个jsp文件，然后再去编译成class文件</p>
+<p>  <img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/53668114.jpg"></p>
+</li>
+</ul>
+<h2 id="九大隐式对象"><a href="#九大隐式对象" class="headerlink" title="九大隐式对象"></a>九大隐式对象</h2><h3 id="1、request-请求"><a href="#1、request-请求" class="headerlink" title="1、request 请求"></a>1、request 请求</h3><ul>
+<li>获取请求参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String param=request.getParameter(key);  <span class="comment">//get?username=lisi  post 请求体里面</span></span><br><span class="line">   String header=request.getHeader(<span class="string">&quot;accept-language&quot;</span>);<span class="comment">//获取请求头</span></span><br><span class="line">String uri=request.getRequestURI();<span class="comment">//获取uri</span></span><br><span class="line">String method=request.getMethod();<span class="comment">//获取请求方式</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>保存数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">request.setAttribute(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>);<span class="comment">//保存内容</span></span><br><span class="line">request.getAttribute(<span class="string">&quot;key&quot;</span>);<span class="comment">//获取内容</span></span><br><span class="line">request.removeAttribute(<span class="string">&quot;key&quot;</span>);<span class="comment">//删除内容</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>转发</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getRequestDispachter(<span class="string">&quot;user.jsp&quot;</span>).forward(request,response);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置编码</li>
+</ul>
+<p>get请求方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一：</span></span><br><span class="line"><span class="keyword">new</span> String(<span class="string">&quot;key&quot;</span>.getBytes(<span class="string">&quot;iso-8859-1&quot;</span>),<span class="string">&quot;utf-8&quot;</span>);<span class="comment">//get乱码问题</span></span><br><span class="line"><span class="comment">//方式二：</span></span><br><span class="line"><span class="comment">//或者在tomcat的server.xml文件中的Connector标签中添加属性URIEncoding=&quot;utf-8&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>post请求方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);<span class="comment">//post乱码问题</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>转发的特点</li>
+</ul>
+<p>1、浏览器的地址不会发生变化</p>
+<p>2、同一个request保存的数据可以不停的转发给下一个页面使用</p>
+<ul>
+<li>注意</li>
+</ul>
+<p>1、一定要先设置编码格式，再取数据</p>
+<p>2、request保存的信息在一次请求中有效</p>
+<p>3、转发之前所有页面输出的内容都无效</p>
+<p>4、get请求：在form表单提交的时候action里面的地址?后面的内容会被重写 </p>
+<p>5、post请求：在form表单提交的时候action里面的地址?后面的内容不会被重写</p>
+<h3 id="2、response-响应"><a href="#2、response-响应" class="headerlink" title="2、response 响应"></a>2、response 响应</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、重定向：告诉浏览器重新访问某个地址</span></span><br><span class="line"></span><br><span class="line">   response.sendRedirect(<span class="string">&quot;login.html&quot;</span>);</span><br><span class="line"><span class="comment">//2、向浏览器写出数据</span></span><br><span class="line">response.getWriter().write(<span class="string">&quot;登录失败&quot;</span>);</span><br><span class="line">response.getWriter().write(<span class="string">&quot;&lt;script&gt;alert(&#x27;登录失败&#x27;);location=&#x27;login.html&#x27;&lt;/script&gt;&quot;</span>); </span><br><span class="line"><span class="comment">//response.getOutputStream().write(&quot;hello&quot;.getBytes());</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3、添加响应头</span></span><br><span class="line">response.addHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;text/html; charset=UTF-8&quot;</span>);<span class="comment">//添加编码格式</span></span><br><span class="line">response.addHeader(<span class="string">&quot;aa&quot;</span>, <span class="string">&quot;bb&quot;</span>);<span class="comment">//添加自定义的响应头信息</span></span><br><span class="line">response.addHeader(<span class="string">&quot;refresh&quot;</span>, <span class="string">&quot;3;url=&#x27;https://www.baidu.com&#x27;&quot;</span>);<span class="comment">//3秒钟跳转页面</span></span><br><span class="line"></span><br><span class="line">response.setStatus(<span class="number">302</span>);<span class="comment">//通过状态码实现重定向</span></span><br><span class="line">response.setHeader(<span class="string">&quot;location&quot;</span>, <span class="string">&quot;https://www.baidu.com&quot;</span>);<span class="comment">//通过location告诉浏览器重定向的地址</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>request和response区别</strong></p>
+<p>在页面跳转<br>1、request地址栏不发生变化<br>2、response地址栏发生变化</p>
+<p>在保存信息<br>1、request可以保存信息<br>2、response不可以保存信息</p>
+<p>在页面访问<br>1、request可以访问任意页面<br>2、response只能访问不在WEB-INF下的页面</p>
+<h3 id="3、Cookie（不属于九大隐式对象）"><a href="#3、Cookie（不属于九大隐式对象）" class="headerlink" title="3、Cookie（不属于九大隐式对象）"></a>3、Cookie（不属于九大隐式对象）</h3><p>####　什么是Cookie</p>
+<p>Cookie是有服务端创建的键值对对象，可以将该对象保存在浏览器上</p>
+<p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/89880487.jpg"></p>
+<h4 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h4><ol>
+<li>降低了服务器保存用户信息的压力。</li>
+<li>跟踪用户，了解行踪。</li>
+</ol>
+<h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie=<span class="keyword">new</span> Cookie(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>);<span class="comment">//创建</span></span><br><span class="line">response.addCookie(cookie);<span class="comment">//发送给客户端</span></span><br></pre></td></tr></table></figure>
+
+<p>####　常用的方法：</p>
+<p>setMaxAge(秒);</p>
+<ul>
+<li><blockquote>
+<p>0，cookie保存到硬盘中，在生命时间内都有效</p>
+</blockquote>
+</li>
+<li>=0，删除指定cookie</li>
+<li>&lt;0，浏览器会话结束即失效（默认）</li>
+</ul>
+<p>setPath(路径);</p>
+<ul>
+<li>访问的路径包含了设置的路径，则cookie会被传输会服务器。例如：setPath(“/Servlet/shop”);</li>
+<li>访问/Servlet/shop/PurchaseServlet，cookie会被传输会服务器，访问/Servlet/user/UserServlet，cookie不会别传输会服务器。</li>
+</ul>
+<p>####　Cookie的获取</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies=request.getCookies();<span class="comment">//获取所有的cookie</span></span><br><span class="line"><span class="keyword">for</span>(Cookie c:cookies)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="string">&quot;name2&quot;</span>.equals(c.getName()))&#123;</span><br><span class="line">        System.out.println(c.getValue());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、session（银行开户获得银行卡号）"><a href="#3、session（银行开户获得银行卡号）" class="headerlink" title="3、session（银行开户获得银行卡号）"></a>3、session（银行开户获得银行卡号）</h3><p>####　什么是session</p>
+<p>session是保存在客户端的一个回话对象，用来标示一个唯一用户</p>
+<h4 id="session的原理"><a href="#session的原理" class="headerlink" title="session的原理"></a>session的原理</h4><p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/73288636.jpg"></p>
+<p>作用：</p>
+<p>保存数据，保存数据的范围是一个会话</p>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">session.setAttribute(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>);<span class="comment">//保存内容</span></span><br><span class="line">session.getAttribute(<span class="string">&quot;key&quot;</span>);<span class="comment">//获取内容</span></span><br><span class="line">session.removeAttribute(<span class="string">&quot;key&quot;</span>);<span class="comment">//删除内容</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>往session中保存用户信息,给所有页面使用</li>
+<li>如果服务挂了，session就没有了</li>
+<li>如果浏览器关闭了，session还存在，但是用户的jessionId没有了，所以再次访问的时候就找不到以前的session对象，那么以前的session对象就在30分钟之后自动消失</li>
+<li>session.invalidate();//让session失效</li>
+<li>用户长时间不访问服务，session就会失效</li>
+</ul>
+<h3 id="4、application"><a href="#4、application" class="headerlink" title="4、application"></a>4、application</h3><p>作用：</p>
+<p>保存数据，保存数据的范围是整个应用</p>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">application.setAttribute(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>);<span class="comment">//保存内容</span></span><br><span class="line">application.getAttribute(<span class="string">&quot;key&quot;</span>);<span class="comment">//获取内容</span></span><br><span class="line">application.removeAttribute(<span class="string">&quot;key&quot;</span>);<span class="comment">//删除内容</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5、pageContext"><a href="#5、pageContext" class="headerlink" title="5、pageContext"></a>5、pageContext</h3><p>作用:<br>1、保存数据<br>2、获取其他域对象</p>
+<p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">session.setAttribute(<span class="string">&quot;age&quot;</span>, <span class="number">20</span>);</span><br><span class="line">application.setAttribute(<span class="string">&quot;age&quot;</span>, <span class="number">21</span>);</span><br><span class="line">pageContext.setAttribute(<span class="string">&quot;age&quot;</span>, <span class="number">18</span>);</span><br><span class="line">request.setAttribute(<span class="string">&quot;age&quot;</span>, <span class="number">19</span>);</span><br><span class="line">pageContext.findAttribute(<span class="string">&quot;age&quot;</span>);<span class="comment">//按照域对象从小到大的范围进行查找</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="jsp动作标签"><a href="#jsp动作标签" class="headerlink" title="jsp动作标签"></a>jsp动作标签</h2><h3 id="jsp-include标签"><a href="#jsp-include标签" class="headerlink" title="jsp:include标签"></a>jsp:include标签</h3><p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/50178470.jpg"></p>
+<h3 id="useBean"><a href="#useBean" class="headerlink" title="useBean"></a>useBean</h3><p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/4333878.jpg"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 创建javabean对象 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:useBean</span> <span class="attr">id</span>=<span class="string">&quot;book1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.hemi.bean.Book&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:useBean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 将表单中的所有name获取出来，然后自动的封装到对象的属性中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">&quot;book1&quot;</span> <span class="attr">property</span>=<span class="string">&quot;*&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:setProperty</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 给对象属性赋值 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">&quot;book&quot;</span> <span class="attr">property</span>=<span class="string">&quot;bookname&quot;</span>  <span class="attr">value</span>=<span class="string">&quot;三国&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 获取对象属性值 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:getProperty</span> <span class="attr">property</span>=<span class="string">&quot;bookname&quot;</span> <span class="attr">name</span>=<span class="string">&quot;book&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>1、创建User</p>
+<p>2、编写UserDao ,调用BaseDao</p>
+<p>3、编写UserService,调用UserDao</p>
+<p>4、编写login.jsp</p>
+<p>5、编写doLogin.jsp</p>
+<ul>
+<li><p>获取参数</p>
+</li>
+<li><p>调用userService中的方法</p>
+</li>
+<li><p>判断返回的User是否为空</p>
+</li>
+<li><p>如果为空，跳转login.jsp</p>
+</li>
+<li><p>如果不为空，保存user对象到session,并且重定向到user.jsp</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/day09_jsp/jsp/" data-id="ckdvnr2o9000hhv5d4vbve5jw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/17/day09_jsp/eljstl/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          EL表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/17/day09_jsp/tomcat/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">tomcat</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/">java基础增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7%E5%A2%9E%E5%BC%BA/">java高级增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/" rel="tag">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" rel="tag">javaweb三驾马车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" rel="tag">java基础增强</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsp/" rel="tag">jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql-%E7%BC%93%E5%AD%98/" rel="tag">nosql 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-aop/" rel="tag">spring aop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-ioc/" rel="tag">spring ioc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-jdbc/" rel="tag">spring jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mybatis/" rel="tag">spring mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-struts2-hibernate/" rel="tag">spring struts2 hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-%E4%BA%8B%E5%8A%A1/" rel="tag">spring 事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springmvc/" rel="tag">springmvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml%E8%A7%A3%E6%9E%90/" rel="tag">xml解析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" rel="tag">中级测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-jquery/" rel="tag">前端 jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" rel="tag">持久化框架 mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" rel="tag">持久层框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" rel="tag">数据库 mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" rel="tag">高级项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hibernate/" style="font-size: 13.33px;">hibernate</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" style="font-size: 13.33px;">javaweb三驾马车</a> <a href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" style="font-size: 16.67px;">java基础增强</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nosql-%E7%BC%93%E5%AD%98/" style="font-size: 10px;">nosql 缓存</a> <a href="/tags/spring-aop/" style="font-size: 10px;">spring aop</a> <a href="/tags/spring-ioc/" style="font-size: 10px;">spring ioc</a> <a href="/tags/spring-jdbc/" style="font-size: 10px;">spring jdbc</a> <a href="/tags/spring-mybatis/" style="font-size: 10px;">spring mybatis</a> <a href="/tags/spring-struts2-hibernate/" style="font-size: 10px;">spring struts2 hibernate</a> <a href="/tags/spring-%E4%BA%8B%E5%8A%A1/" style="font-size: 10px;">spring 事务</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springmvc/" style="font-size: 10px;">springmvc</a> <a href="/tags/struts2/" style="font-size: 10px;">struts2</a> <a href="/tags/xml%E8%A7%A3%E6%9E%90/" style="font-size: 10px;">xml解析</a> <a href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">中级测试</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF-jquery/" style="font-size: 13.33px;">前端 jquery</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" style="font-size: 10px;">持久化框架 mybatis</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">持久层框架</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" style="font-size: 10px;">数据库 mysql</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">高级项目</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/05/day29_nginx/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day31_%E9%83%A8%E7%BD%B2/%E5%8F%91%E5%B8%83%E6%96%87%E6%A1%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day30_docker/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/21/day32_react/react/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/day28_es6/es6/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>hibernate查询api | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="hibernate查询apioid就是根据对象的id查询，例如get()、load() hql Query123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hibernate查询api">
+<meta property="og:url" content="http://yoursite.com/2017/09/12/day16_hibernate/hibernate_query/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="hibernate查询apioid就是根据对象的id查询，例如get()、load() hql Query123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-12T03:26:34.000Z">
+<meta property="article:modified_time" content="2017-11-17T08:19:38.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="hibernate">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-day16_hibernate/hibernate_query" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/12/day16_hibernate/hibernate_query/" class="article-date">
+  <time datetime="2017-09-12T03:26:34.000Z" itemprop="datePublished">2017-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hibernate查询api
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="hibernate查询api"><a href="#hibernate查询api" class="headerlink" title="hibernate查询api"></a>hibernate查询api</h2><h3 id="oid"><a href="#oid" class="headerlink" title="oid"></a>oid</h3><p>就是根据对象的id查询，例如get()、load()</p>
+<h3 id="hql-Query"><a href="#hql-Query" class="headerlink" title="hql Query"></a>hql Query</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -----------------条件查询-------------------</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User u where u.uid=1&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        User u = query.uniqueResult();</span><br><span class="line">        System.out.println(u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User u where u.username=&#x27;lisi&#x27; and u.password=&#x27;123&#x27;&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        User u = query.uniqueResult();</span><br><span class="line">        System.out.println(u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ---------------占位符条件查询------------------</span></span><br><span class="line">    <span class="comment">// 占位符条件查询 ?</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User u where u.username=? and u.password=?&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="number">0</span>, <span class="string">&quot;lisi&quot;</span>);</span><br><span class="line">        query.setParameter(<span class="number">1</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">        User u = query.uniqueResult();</span><br><span class="line">        System.out.println(u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 命名占位符条件查询1 parameter</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User where username=:username and password=:password&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;lisi&quot;</span>);</span><br><span class="line">        query.setParameter(<span class="string">&quot;password&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">        User u = query.uniqueResult();</span><br><span class="line">        System.out.println(u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 命名占位符条件查询2 javabean</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User where username=:username and password=:password&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">&quot;lisi&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">        query.setProperties(user);</span><br><span class="line">        User u = query.uniqueResult();</span><br><span class="line">        System.out.println(u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 命名占位符条件查询3 map,可以解决命名占位符与实际参数名不一样的问题</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User where username=:user and password=:pwd&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;user&quot;</span>, <span class="string">&quot;lisi&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;pwd&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">        query.setProperties(map);</span><br><span class="line">        User u = query.uniqueResult();</span><br><span class="line">        System.out.println(u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模糊查询</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test7</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User where username like ?&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="number">0</span>, <span class="string">&quot;%七%&quot;</span>);</span><br><span class="line">        List&lt;User&gt; list = query.getResultList();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查询列表,并且排序</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test8</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User order by password desc&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        List&lt;User&gt; list = query.getResultList();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分页查询</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test9</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        query.setFirstResult(<span class="number">0</span>);</span><br><span class="line">        query.setMaxResults(<span class="number">3</span>);</span><br><span class="line">        List&lt;User&gt; list = query.getResultList();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态查询</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test10</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.setPassword(<span class="string">&quot;123&quot;</span>);</span><br><span class="line"></span><br><span class="line">        String hql = <span class="string">&quot;from User where 1=1&quot;</span>;</span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer(hql);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (user.getPassword() != <span class="keyword">null</span> &amp;&amp; user.getPassword() != <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">            sb.append(<span class="string">&quot; and password=:password&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(sb.toString());</span><br><span class="line">        query.setProperties(user);</span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; list = query.getResultList();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// --------------------连接------------------------</span></span><br><span class="line">    <span class="comment">// 内连接，封装成数组，对象数组 查询roleid=1的用户</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test11</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User u inner join u.roleSet ro where ro.roleid=1&quot;</span>;</span><br><span class="line">        Query&lt;Object[]&gt; query = session.createQuery(hql);</span><br><span class="line">        List&lt;Object[]&gt; list = query.getResultList();</span><br><span class="line">        <span class="keyword">for</span> (Object[] obj : list) &#123;</span><br><span class="line">            System.out.println(Arrays.toString(obj));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 迫切内连接，直接封装成对象 查询custid=1的用户</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test12</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User u inner join fetch u.custSet c where c.custid=1&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        List&lt;User&gt; list = query.getResultList();</span><br><span class="line">        System.out.println(list.size());</span><br><span class="line">        System.out.println(list.get(<span class="number">0</span>) + <span class="string">&quot;:&quot;</span> + list.get(<span class="number">0</span>).getCustSet());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test13</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;from User u where u.username=&#x27;洪七公&#x27;&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        List&lt;User&gt; list = query.getResultList();</span><br><span class="line">        System.out.println(list.size());</span><br><span class="line">        System.out.println(list.get(<span class="number">0</span>).getCustSet());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// -----------------投影查询--------------------</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 投影查询 object[]</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test14</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;select username,password from User u where u.uid=1&quot;</span>;</span><br><span class="line">        Query&lt;Object[]&gt; query = session.createQuery(hql);</span><br><span class="line">        Object[] obj = query.uniqueResult();</span><br><span class="line">        System.out.println(Arrays.toString(obj));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查询一个值的时候，只能使用Object，不能用数组</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test15</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;select count(*) from User&quot;</span>;</span><br><span class="line">        Query&lt;Object&gt; query = session.createQuery(hql);</span><br><span class="line">        Object obj = query.uniqueResult();</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 投影查询 list集合</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test16</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;select new list(username,password) from User u where u.uid=1&quot;</span>;</span><br><span class="line">        Query&lt;List&lt;String&gt;&gt; query = session.createQuery(hql);</span><br><span class="line">        List&lt;String&gt; list = query.uniqueResult();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 投影查询 map集合</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test17</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;select new map(username,password) from User u where u.uid=1&quot;</span>;</span><br><span class="line">        Query&lt;Map&lt;String, String&gt;&gt; query = session.createQuery(hql);</span><br><span class="line">        Map&lt;String, String&gt; map = query.uniqueResult();</span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 投影查询 自定义对象</span></span><br><span class="line">    <span class="comment">// 注意：new User(uid,username,password)会调用对应的构造方法，没有就会报错</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test18</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String hql = <span class="string">&quot;select new User(username,password) from User u where u.uid=1&quot;</span>;</span><br><span class="line">        Query&lt;User&gt; query = session.createQuery(hql);</span><br><span class="line">        User user = query.uniqueResult();</span><br><span class="line">        System.out.println(user);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="qbc-Citira"><a href="#qbc-Citira" class="headerlink" title="qbc Citira"></a>qbc Citira</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模糊查询</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Criteria criteria = session.createCriteria(User.class)</span><br><span class="line">            .add(Restrictions.like(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;%七%&quot;</span>));</span><br><span class="line">    List&lt;User&gt; list = criteria.list();</span><br><span class="line">    System.out.println(list);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多条件查询</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Criteria criteria = session.createCriteria(User.class)</span><br><span class="line">            .add(Restrictions.eq(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;李四&quot;</span>))</span><br><span class="line">            .add(Restrictions.eq(<span class="string">&quot;password&quot;</span>, <span class="string">&quot;123&quot;</span>));</span><br><span class="line">    List&lt;User&gt; list = criteria.list();</span><br><span class="line">    System.out.println(list);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//排序</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Criteria criteria = session.createCriteria(User.class)</span><br><span class="line">            .addOrder(Order.desc(<span class="string">&quot;password&quot;</span>));<span class="comment">//降序</span></span><br><span class="line">    List&lt;User&gt; list = criteria.list();</span><br><span class="line">    System.out.println(list);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//分页</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Criteria criteria = session.createCriteria(User.class)</span><br><span class="line">            .setFirstResult(<span class="number">3</span>)</span><br><span class="line">            .setMaxResults(<span class="number">3</span>);</span><br><span class="line">    List&lt;User&gt; list = criteria.list();</span><br><span class="line">    System.out.println(list);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//---------------------投影查询---------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//聚合函数 count()</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Criteria criteria = session.createCriteria(User.class);</span><br><span class="line">    criteria.setProjection(Projections.rowCount());<span class="comment">//count()</span></span><br><span class="line">    Object result = criteria.uniqueResult();</span><br><span class="line">    System.out.println(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//分组计算</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test7</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Criteria criteria = session.createCriteria(User.class);</span><br><span class="line">    criteria.setProjection(Projections.projectionList()</span><br><span class="line">            .add(Projections.rowCount())</span><br><span class="line">            .add(Projections.groupProperty(<span class="string">&quot;password&quot;</span>)));</span><br><span class="line">    List&lt;Object[]&gt; list = criteria.list();</span><br><span class="line">    <span class="keyword">for</span> (Object[] objects : list) &#123;</span><br><span class="line">        System.out.println(Arrays.toString(objects));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//选出部分字段</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test8</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Criteria criteria = session.createCriteria(User.class);</span><br><span class="line">    criteria.setProjection(Projections.projectionList()</span><br><span class="line">            .add(Projections.property(<span class="string">&quot;username&quot;</span>))</span><br><span class="line">            .add(Projections.property(<span class="string">&quot;password&quot;</span>)));</span><br><span class="line">    List&lt;Object[]&gt; list = criteria.list();</span><br><span class="line">    <span class="keyword">for</span> (Object[] objects : list) &#123;</span><br><span class="line">        System.out.println(Arrays.toString(objects));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="sql-SQLQuery"><a href="#sql-SQLQuery" class="headerlink" title="sql SQLQuery"></a>sql SQLQuery</h3><p>原生sql语句查询</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/12/day16_hibernate/hibernate_query/" data-id="ckdvnr2oo001jhv5d8r7m7egw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/" rel="tag">hibernate</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/15/day22_ssh/crm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/06/day14_spring/spring-mybatis/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">spring-mybatis整合</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/">java基础增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7%E5%A2%9E%E5%BC%BA/">java高级增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/" rel="tag">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" rel="tag">javaweb三驾马车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" rel="tag">java基础增强</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsp/" rel="tag">jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql-%E7%BC%93%E5%AD%98/" rel="tag">nosql 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-aop/" rel="tag">spring aop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-ioc/" rel="tag">spring ioc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-jdbc/" rel="tag">spring jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mybatis/" rel="tag">spring mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-struts2-hibernate/" rel="tag">spring struts2 hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-%E4%BA%8B%E5%8A%A1/" rel="tag">spring 事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springmvc/" rel="tag">springmvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml%E8%A7%A3%E6%9E%90/" rel="tag">xml解析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" rel="tag">中级测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-jquery/" rel="tag">前端 jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" rel="tag">持久化框架 mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" rel="tag">持久层框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" rel="tag">数据库 mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" rel="tag">高级项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hibernate/" style="font-size: 13.33px;">hibernate</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" style="font-size: 13.33px;">javaweb三驾马车</a> <a href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" style="font-size: 16.67px;">java基础增强</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nosql-%E7%BC%93%E5%AD%98/" style="font-size: 10px;">nosql 缓存</a> <a href="/tags/spring-aop/" style="font-size: 10px;">spring aop</a> <a href="/tags/spring-ioc/" style="font-size: 10px;">spring ioc</a> <a href="/tags/spring-jdbc/" style="font-size: 10px;">spring jdbc</a> <a href="/tags/spring-mybatis/" style="font-size: 10px;">spring mybatis</a> <a href="/tags/spring-struts2-hibernate/" style="font-size: 10px;">spring struts2 hibernate</a> <a href="/tags/spring-%E4%BA%8B%E5%8A%A1/" style="font-size: 10px;">spring 事务</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springmvc/" style="font-size: 10px;">springmvc</a> <a href="/tags/struts2/" style="font-size: 10px;">struts2</a> <a href="/tags/xml%E8%A7%A3%E6%9E%90/" style="font-size: 10px;">xml解析</a> <a href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">中级测试</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF-jquery/" style="font-size: 13.33px;">前端 jquery</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" style="font-size: 10px;">持久化框架 mybatis</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">持久层框架</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" style="font-size: 10px;">数据库 mysql</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">高级项目</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/05/day29_nginx/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day31_%E9%83%A8%E7%BD%B2/%E5%8F%91%E5%B8%83%E6%96%87%E6%A1%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day30_docker/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/21/day32_react/react/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/day28_es6/es6/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

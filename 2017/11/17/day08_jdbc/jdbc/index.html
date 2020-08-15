@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>jdbc | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="jdbc的概念概念：是java提供的一套连接数据库的接口规范 作用：一套程序，可以连接多个数据库 特点：  面向接口编程 切换不同的数据库的时候，不同jdbc的代码，只需要修改部分参数就可以 大大的降低了程序员开发的成本  jdbc快速入门 修改 1234567891011121314151617String className&#x3D;&quot;com.mysql.jdbc.Driver&quot;;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jdbc">
+<meta property="og:url" content="http://yoursite.com/2017/11/17/day08_jdbc/jdbc/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="jdbc的概念概念：是java提供的一套连接数据库的接口规范 作用：一套程序，可以连接多个数据库 特点：  面向接口编程 切换不同的数据库的时候，不同jdbc的代码，只需要修改部分参数就可以 大大的降低了程序员开发的成本  jdbc快速入门 修改 1234567891011121314151617String className&#x3D;&quot;com.mysql.jdbc.Driver&quot;;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/95652021.jpg">
+<meta property="article:published_time" content="2017-11-17T07:51:56.000Z">
+<meta property="article:modified_time" content="2017-11-17T08:10:53.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oyirtj6m7.bkt.clouddn.com/17-11-17/95652021.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-day08_jdbc/jdbc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/day08_jdbc/jdbc/" class="article-date">
+  <time datetime="2017-11-17T07:51:56.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jdbc
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="jdbc的概念"><a href="#jdbc的概念" class="headerlink" title="jdbc的概念"></a>jdbc的概念</h2><p>概念：是java提供的一套连接数据库的接口规范</p>
+<p>作用：一套程序，可以连接多个数据库</p>
+<p>特点：</p>
+<ul>
+<li>面向接口编程</li>
+<li>切换不同的数据库的时候，不同jdbc的代码，只需要修改部分参数就可以</li>
+<li>大大的降低了程序员开发的成本</li>
+</ul>
+<h2 id="jdbc快速入门"><a href="#jdbc快速入门" class="headerlink" title="jdbc快速入门"></a>jdbc快速入门</h2><p><img src="http://oyirtj6m7.bkt.clouddn.com/17-11-17/95652021.jpg"></p>
+<p>修改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">String className=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>;</span><br><span class="line">String user=<span class="string">&quot;root&quot;</span>;</span><br><span class="line">String password=<span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="comment">//1、注册驱动</span></span><br><span class="line">Class.forName(className);</span><br><span class="line"><span class="comment">//2、获取连接 url 选择哪个类型数据库，ip 端口号 数据库名 参数</span></span><br><span class="line">String url=<span class="string">&quot;jdbc:mysql://localhost:3306/shop?useUnicode=true&amp;characterEncoding=utf-8&quot;</span>;</span><br><span class="line"><span class="comment">//3、建立连接</span></span><br><span class="line">Connection connection = DriverManager.getConnection(url, user, password);</span><br><span class="line"><span class="comment">//4、创建表达式</span></span><br><span class="line">Statement sta = connection.createStatement();    </span><br><span class="line"><span class="comment">//5、数据库操作</span></span><br><span class="line">String sql=<span class="string">&quot;update user set money=money+1000 where uid=2&quot;</span>;</span><br><span class="line"><span class="keyword">int</span> result = sta.executeUpdate(sql);</span><br><span class="line">System.out.println(result);</span><br><span class="line"><span class="comment">//6、关闭连接</span></span><br><span class="line">connection.close();</span><br></pre></td></tr></table></figure>
+
+<p>查询</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">String className=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>;</span><br><span class="line">Class.forName(className);</span><br><span class="line">String url=<span class="string">&quot;jdbc:mysql://localhost:3306/shop&quot;</span>;</span><br><span class="line">String user=<span class="string">&quot;root&quot;</span>;</span><br><span class="line">String pwd=<span class="string">&quot;&quot;</span>;</span><br><span class="line">Connection con=DriverManager.getConnection(url, user, pwd);</span><br><span class="line">Statement sta=con.createStatement();</span><br><span class="line">String sql=<span class="string">&quot;select * from user&quot;</span>;</span><br><span class="line">ResultSet rs = sta.executeQuery(sql);</span><br><span class="line"><span class="comment">//处理结果集        </span></span><br><span class="line">List&lt;User&gt; list=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">while</span>(rs.next())&#123;<span class="comment">//取一行记录</span></span><br><span class="line">    <span class="keyword">int</span> uid = rs.getInt(<span class="string">&quot;uid&quot;</span>);</span><br><span class="line">    String username = rs.getString(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">    String password = rs.getString(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> utypeId = rs.getInt(<span class="string">&quot;utypeId&quot;</span>);</span><br><span class="line">    User u=<span class="keyword">new</span> User(uid, username, password, utypeId);</span><br><span class="line">    list.add(u);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(list);</span><br><span class="line">con.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="jdbc小总结"><a href="#jdbc小总结" class="headerlink" title="jdbc小总结"></a>jdbc小总结</h2><p>三个接口一个类</p>
+<ul>
+<li><p>Connection</p>
+<ul>
+<li>createStatement()</li>
+<li>prepareStatement(sql)</li>
+<li>close()</li>
+</ul>
+</li>
+<li><p>Statement</p>
+<ul>
+<li>executeQuery(sql)</li>
+<li>executeUpdate(sql)</li>
+</ul>
+</li>
+<li><p>PrepareStatement</p>
+<ul>
+<li>setObject()</li>
+<li>executeUpdate()</li>
+<li>executeQuery()</li>
+</ul>
+</li>
+<li><p>ResultSet</p>
+<ul>
+<li>next()</li>
+<li>getObject()</li>
+</ul>
+</li>
+<li><p>DriverManager</p>
+<ul>
+<li>getConnection()</li>
+</ul>
+</li>
+</ul>
+<h3 id="ResultSet结果集"><a href="#ResultSet结果集" class="headerlink" title="ResultSet结果集"></a>ResultSet结果集</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TYPE_SCROLL_INSENSITIVE:滚动结果集</span><br><span class="line">CONCUR_READ_ONLY:数据只读</span><br><span class="line">Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ResultSetMetaData metaData = rs.getMetaData();<span class="comment">//获取元数据</span></span><br><span class="line">metaData.getColumnCount();<span class="comment">//列数</span></span><br><span class="line">metaData.getColumnName(<span class="number">2</span>);<span class="comment">//列名</span></span><br><span class="line">metaData.getColumnType(<span class="number">2</span>);<span class="comment">//字段的数据类型</span></span><br><span class="line">metaData.getTableName(<span class="number">2</span>);<span class="comment">//表名    </span></span><br><span class="line">metaData.getColumnLabel(<span class="number">2</span>);<span class="comment">//别名，如果没有别名就是字段名本身</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h3><p>事务逻辑上的一组操作,组成这组操作的各个逻辑单元,要么一起成功,要么一起失败.</p>
+<h3 id="事务特性-ACID"><a href="#事务特性-ACID" class="headerlink" title="事务特性:ACID"></a>事务特性:ACID</h3><ul>
+<li>原子性    :强调事务的不可分割.</li>
+<li>一致性    :事务的执行的前后数据的完整性保持一致(转账).</li>
+<li>隔离性    :一个事务执行的过程中,不应该受到其他事务的干扰</li>
+<li>持久性    :事务一旦结束,数据就持久到数据库</li>
+</ul>
+<h3 id="如果不考虑隔离性将会引发下面的安全性问题"><a href="#如果不考虑隔离性将会引发下面的安全性问题" class="headerlink" title="如果不考虑隔离性将会引发下面的安全性问题"></a>如果不考虑隔离性将会引发下面的安全性问题</h3><ul>
+<li>脏读            :一个事务读到了另一个事务的未提交commit的数据 commit+select</li>
+<li>不可重复读    :一个事务读到了另一个事务已经提交的update的数据导致多次查询结果不一致  update+select</li>
+<li>虚读（幻读）    :一个事务读到了另一个事务已经提交的insert的数据导致多次查询结果不一致  insert+select</li>
+</ul>
+<h3 id="解决读问题-设置事务隔离级别（每种数据库的隔离级别不一样）"><a href="#解决读问题-设置事务隔离级别（每种数据库的隔离级别不一样）" class="headerlink" title="解决读问题:设置事务隔离级别（每种数据库的隔离级别不一样）"></a>解决读问题:设置事务隔离级别（每种数据库的隔离级别不一样）</h3><ul>
+<li>未提交读    :脏读，不可重复读，虚读都有可能发生</li>
+<li>已提交读    :避免脏读。但是不可重复读和虚读有可能发生(sqlserver,orcale)</li>
+<li>可重复读    :避免脏读和不可重复读.但是虚读有可能发生（mysql）</li>
+<li>串行化的    :避免以上所有读问题</li>
+</ul>
+<h2 id="java中如何去封装处理事务的代码"><a href="#java中如何去封装处理事务的代码" class="headerlink" title="java中如何去封装处理事务的代码"></a>java中如何去封装处理事务的代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取连接对象</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Connection con = tl.get();<span class="comment">// 先到ThreadLocal根据当前线程找一找有没有可以用的Connection，如果有，说明当前线程中的connection是开启事务的</span></span><br><span class="line">    <span class="keyword">if</span> (con == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">//如果没有，在创建一个新的connectin对象，然后返回</span></span><br><span class="line">        con = DriverManager.getConnection(url, user, password);</span><br><span class="line">        <span class="keyword">return</span> con;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果有，就直接返回对象</span></span><br><span class="line">    <span class="keyword">return</span> con;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 开始事务</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startTransaction</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Connection con = DriverManager.getConnection(url, user, password);</span><br><span class="line">    con.setAutoCommit(<span class="keyword">false</span>);<span class="comment">// 设置自动提交为false</span></span><br><span class="line">    tl.set(con);<span class="comment">// 将connection放到ThreadLocal</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 提交事务</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">commit</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Connection con = tl.get();<span class="comment">// 从ThreadLocal中获取connection</span></span><br><span class="line">    con.commit();<span class="comment">//提交事务</span></span><br><span class="line">    con.close();<span class="comment">//关闭资源</span></span><br><span class="line">    tl.remove();<span class="comment">// 提交之后从ThreadLocal移除connection</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 回滚事务</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rollback</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Connection con = tl.get();<span class="comment">// 从ThreadLocal中获取connection</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        con.rollback();<span class="comment">// 回滚事务</span></span><br><span class="line">        con.close();<span class="comment">//关闭资源</span></span><br><span class="line">        tl.remove();<span class="comment">// 提交之后从ThreadLocal移除connection</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 关闭资源</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ps</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> con</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(PreparedStatement ps, Connection con)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (tl.get() != <span class="keyword">null</span>) &#123;<span class="comment">// 如果不为空，说明之前开启过事务，不能直接关闭，交给事务去关闭</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 没有开启事务则正常关闭</span></span><br><span class="line">    <span class="keyword">if</span> (ps != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ps.close();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (con != <span class="keyword">null</span>) &#123;</span><br><span class="line">        con.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/day08_jdbc/jdbc/" data-id="ckdvnr2o6000ahv5d7odbg960" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/17/day07_sql/sql/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据库
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/17/day09_jsp/eljstl/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">EL表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E4%B8%AD%E7%BA%A7%E5%9F%BA%E7%A1%80/">java中级基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/">java基础增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7/">java高级</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java%E9%AB%98%E7%BA%A7%E5%A2%9E%E5%BC%BA/">java高级增强</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/" rel="tag">hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" rel="tag">javaweb三驾马车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" rel="tag">java基础增强</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsp/" rel="tag">jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql-%E7%BC%93%E5%AD%98/" rel="tag">nosql 缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-aop/" rel="tag">spring aop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-ioc/" rel="tag">spring ioc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-jdbc/" rel="tag">spring jdbc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-mybatis/" rel="tag">spring mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-struts2-hibernate/" rel="tag">spring struts2 hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-%E4%BA%8B%E5%8A%A1/" rel="tag">spring 事务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springmvc/" rel="tag">springmvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml%E8%A7%A3%E6%9E%90/" rel="tag">xml解析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" rel="tag">中级测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF-jquery/" rel="tag">前端 jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" rel="tag">持久化框架 mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" rel="tag">持久层框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" rel="tag">数据库 mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" rel="tag">高级项目</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hibernate/" style="font-size: 13.33px;">hibernate</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/javaweb%E4%B8%89%E9%A9%BE%E9%A9%AC%E8%BD%A6/" style="font-size: 13.33px;">javaweb三驾马车</a> <a href="/tags/java%E5%9F%BA%E7%A1%80%E5%A2%9E%E5%BC%BA/" style="font-size: 16.67px;">java基础增强</a> <a href="/tags/jsp/" style="font-size: 10px;">jsp</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nosql-%E7%BC%93%E5%AD%98/" style="font-size: 10px;">nosql 缓存</a> <a href="/tags/spring-aop/" style="font-size: 10px;">spring aop</a> <a href="/tags/spring-ioc/" style="font-size: 10px;">spring ioc</a> <a href="/tags/spring-jdbc/" style="font-size: 10px;">spring jdbc</a> <a href="/tags/spring-mybatis/" style="font-size: 10px;">spring mybatis</a> <a href="/tags/spring-struts2-hibernate/" style="font-size: 10px;">spring struts2 hibernate</a> <a href="/tags/spring-%E4%BA%8B%E5%8A%A1/" style="font-size: 10px;">spring 事务</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springmvc/" style="font-size: 10px;">springmvc</a> <a href="/tags/struts2/" style="font-size: 10px;">struts2</a> <a href="/tags/xml%E8%A7%A3%E6%9E%90/" style="font-size: 10px;">xml解析</a> <a href="/tags/%E4%B8%AD%E7%BA%A7%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">中级测试</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 10px;">其他</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 20px;">前端</a> <a href="/tags/%E5%89%8D%E7%AB%AF-jquery/" style="font-size: 13.33px;">前端 jquery</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6-mybatis/" style="font-size: 10px;">持久化框架 mybatis</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">持久层框架</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql/" style="font-size: 10px;">数据库 mysql</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%AB%98%E7%BA%A7%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">高级项目</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/05/day29_nginx/nginx/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day31_%E9%83%A8%E7%BD%B2/%E5%8F%91%E5%B8%83%E6%96%87%E6%A1%A3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/05/day30_docker/docker/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/21/day32_react/react/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/day28_es6/es6/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
